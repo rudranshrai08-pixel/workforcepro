@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -18,6 +19,10 @@ public class Leave {
     @NotBlank(message = "Employee name is required")
     private String employeeName;
 
+    @Email(message = "Invalid email")
+    @NotBlank(message = "Email is required")
+    private String email;
+
     @NotBlank(message = "Leave type is required")
     private String leaveType;
 
@@ -30,7 +35,7 @@ public class Leave {
     @NotBlank(message = "Reason is required")
     private String reason;
 
-    private String status = "Pending";
+    private String status = "PENDING";
 
     public Leave() {
     }
@@ -45,6 +50,14 @@ public class Leave {
 
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getLeaveType() {
