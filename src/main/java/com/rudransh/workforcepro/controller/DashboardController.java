@@ -38,7 +38,12 @@ public class DashboardController {
 
         dashboard.put("Total Employees", employeeRepository.count());
         dashboard.put("Total Departments", departmentRepository.count());
+
         dashboard.put("Total Leaves", leaveRepository.count());
+        dashboard.put("Pending Leaves", leaveRepository.countByStatus("PENDING"));
+        dashboard.put("Approved Leaves", leaveRepository.countByStatus("APPROVED"));
+        dashboard.put("Rejected Leaves", leaveRepository.countByStatus("REJECTED"));
+
         dashboard.put("Total Attendance", attendanceRepository.count());
         dashboard.put("Total Payroll", payrollRepository.count());
 

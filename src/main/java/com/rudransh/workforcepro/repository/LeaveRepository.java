@@ -6,4 +6,6 @@ import com.rudransh.workforcepro.entity.Leave;
 
 public interface LeaveRepository extends JpaRepository<Leave, Long> {
 
+    long countByStatus(String status);
+
 }
