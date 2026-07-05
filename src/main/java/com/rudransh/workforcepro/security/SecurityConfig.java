@@ -24,11 +24,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+
+                // Enable CORS
+                .cors(cors -> {})
+
+                // Disable CSRF
                 .csrf(csrf -> csrf.disable())
 
+                // Stateless Session
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
+                // Authorization Rules
                 .authorizeHttpRequests(auth -> auth
 
                         // Public APIs
@@ -39,7 +46,7 @@ public class SecurityConfig {
                                 "/v3/api-docs/**"
                         ).permitAll()
 
-                        // ADMIN APIs
+                        // ADMIN Only APIs
                         .requestMatchers(
                                 "/api/auth/users",
                                 "/api/auth/users/**"
@@ -49,10 +56,10 @@ public class SecurityConfig {
                         .anyRequest()
                         .authenticated())
 
-                // Disable HTTP Basic because we're using JWT
+                // Disable HTTP Basic
                 .httpBasic(httpBasic -> httpBasic.disable());
 
-        // Register JWT Filter
+        // Add JWT Filter
         http.addFilterBefore(
                 jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class);
