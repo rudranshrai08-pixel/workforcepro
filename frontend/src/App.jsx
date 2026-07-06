@@ -1,19 +1,7 @@
+import Login from "./pages/Login";
+
 function App() {
-  return (
-    <div
-      style={{
-        backgroundColor: "#0f172a",
-        minHeight: "100vh",
-        color: "white",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily: "Arial",
-      }}
-    >
-      <h1>🚀 WorkforcePro Frontend Started Successfully</h1>
-    </div>
-  );
+  return <Login />;
 }
 
 export default App;
