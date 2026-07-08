@@ -8,17 +8,29 @@ import {
   IconButton,
   InputAdornment,
 } from "@mui/material";
-
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+
+import { login, saveToken } from "../services/authService";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
-    console.log("Email:", email);
-    console.log("Password:", password);
+  const handleLogin = async () => {
+    try {
+      const data = await login(email, password);
+
+      console.log("Login Success:", data);
+
+      // Save JWT Token
+      saveToken(data.token);
+
+      alert("Login Successful!");
+    } catch (error) {
+      console.error("Login Failed:", error);
+      alert("Invalid Email or Password");
+    }
   };
 
   return (
